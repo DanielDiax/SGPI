@@ -1,0 +1,28 @@
+﻿@model SGPI.Models.Usuario
+
+@{
+    ViewData["Title"] = "CrearUsuario";
+    Layout = "_layout";
+}
+
+<h1>Crear Usuario</h1>
+
+<form method="post">
+    <div class="row" >
+        <div class="col-3" >
+            <label for="basic-url" class="form-label">Nombre</label>
+            <input  asp-for="Nombre" class="form-control"/>
+        </div>
+        <div class="col-3" >
+            <input  asp-for="PrimerApellido" class="form-control"/>
+        </div>
+        <div class="col-3" >
+
+            <input  asp-for="Nombre" class="form-control"/>
+        </div>
+         <div class="col-3" >
+
+            <input  asp-for="Nombre" class="form-control"/>
+        </div>
+    </div>
+</form>
