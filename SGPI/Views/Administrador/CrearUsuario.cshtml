@@ -8,7 +8,13 @@
 <h1>Crear Usuario</h1>
 
 <form method="post">
+    <div class="row">
+        
+    </div>
     <div class="row" >
+        <div class="col-3">
+            <input asp-for="NumeroDoc" class="form-control" />
+        </div>
         <div class="col-3" >
             <label for="basic-url" class="form-label">Nombre</label>
             <input  asp-for="Nombre" class="form-control"/>
@@ -18,11 +24,14 @@
         </div>
         <div class="col-3" >
 
-            <input  asp-for="Nombre" class="form-control"/>
+            <input  asp-for="SegundoApellido" class="form-control"/>
         </div>
-         <div class="col-3" >
 
-            <input  asp-for="Nombre" class="form-control"/>
+    </div>
+    <div class="row">
+        <div class="div-3 form-control">
+            <label asp-for="IdGenero" class="form-label">Genero</label>
+            @Html.DropDownList("IdGenero", new SelectList(ViewBag.genero, "IdGenero", "Genero"), new {@class="form-control"});
         </div>
     </div>
 </form>
