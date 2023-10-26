@@ -3,7 +3,7 @@
 @{
     // eL arroba es para realizar codigo de c# en html
 
-    ViewData["Title"] = "CrearUsuario";
+    ViewData["Title"] = "ModificarUsuario";
     Layout = "_layout";
 
 }
@@ -54,12 +54,28 @@
 </style>
 
 <header>
-    <h1>Crear Usuario</h1>
+    <h1>Modificar Usuario</h1>
 </header>
 
 
 
 <form method="post" class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="IdDoc">Tipo de Documento</label>
+                @Html.DropDownList("IdDoc", new SelectList(ViewBag.tipoDocumento, "IdDoc", "Descripcion"), new { @class = "form-control" }))
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="NumeroDoc">Número de Documento</label>
+                <input asp-for="NumeroDoc" class="form-control" placeholder="Ejemplo: 123456789">
+            </div>
+        </div>
+
+    </div>
+
     <selection class="form-sgpi">
         <div class="row">
             <div class="col-md-4">
@@ -82,21 +98,7 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="IdDoc">Tipo de Documento</label>
-                    @Html.DropDownList("IdDoc", new SelectList(ViewBag.tipoDocumento, "IdDoc", "Descripcion"), new { @class = "form-control" }))
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="NumeroDoc">Número de Documento</label>
-                    <input asp-for="NumeroDoc" class="form-control" placeholder="Ejemplo: 123456789">
-                </div>
-            </div>
-
-        </div>
+        
 
         <div class="row">
 
@@ -151,7 +153,7 @@
         <br>
         <div class="row">
             <div class="col-md-12 text-center">
-                <button type="submit" class="form-btn">Guardar</button>
+                <button type="submit" class="form-btn">Actualizar</button>
             </div>
         </div>
 </form>
