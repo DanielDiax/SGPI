@@ -1,0 +1,1 @@
+select * from Usuarios where numero_doc = 1234

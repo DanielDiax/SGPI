@@ -1,0 +1,70 @@
+﻿@model SGPI.Models.Usuario
+
+@{
+    // EL arroba es para realizar codigo de c# en html
+
+    ViewData["Title"] = "BuscarUsuario";
+    Layout = "_layout";
+
+}
+
+<header>
+    <h1>Buscar Usuario</h1>
+</header>
+
+
+
+<form method="post" class="container">
+    
+    <div class="row flex">
+
+        <div class="col-6 form-group form-floating">
+            <input asp-for="NumeroDoc" class="form-control" placeholder="Digite el documento a buscar">
+            <label for="floatingInput" asp-for="NumeroDoc">Número de Documento</label>
+        </div>
+        <div class="col-2 mt-4">
+            <button type="submit" style="width: 100%" class="btn btn-primary btn-sm">Consultar</button>
+        </div>
+    </div>
+
+    @if (Model != null)
+    {
+        <div class="row mt-4 card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                        <th>@Html.DisplayNameFor(model => model.PrimerApellido)</th>
+                        <th>@Html.DisplayNameFor(model => model.SegundoApellido)</th>
+                        <th>@Html.DisplayNameFor(model => model.Email)</th>
+                        <th>@Html.DisplayNameFor(model => model.NumeroDoc)</th>
+                        <th>@Html.DisplayNameFor(model => model.IdGeneroNavigation.Descripcion)</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => modelItem.Nombre)</td>
+                        <td>@Html.DisplayFor(modelItem => modelItem.PrimerApellido)</td>
+                        <td>@Html.DisplayFor(modelItem => modelItem.SegundoApellido)</td>
+                        <td>@Html.DisplayFor(modelItem => modelItem.Email)</td>
+                        <td>@Html.DisplayFor(modelItem => modelItem.NumeroDoc)</td>
+                        <td>@Html.DisplayFor(modelItem => modelItem.IdGeneroNavigation.Descripcion)</td>
+                        @* <td>@Html.ActionLink("Edit", "Edit", new {idUsuario = Model.IdUsuario} )</td>
+                    <td>@Html.ActionLink("Delete","Delete", new{idUsuario = Model.IdUsuario}, new { onclick = "return confirm('Esta seguro de que desea eliminar este usuario')"})</td> *@
+                        <td>
+                            @if (Model != null)
+                            {
+                                <a class="btn btn-primary btn-sm" asp-action="EditarUsuario" asp-controller="Administrador" asp-route-idUsuario="@Model.IdUsuario">Editar</a>
+                                <a class="btn btn-danger btn-sm" asp-action="Delete" asp-controller="Administrador" asp-route-idUsuario="@Model.IdUsuario">Eliminar</a>
+                            }
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    }
+</form>
+
+            
