@@ -1,29 +1,26 @@
-﻿@model SGPI.Models.Usuario
+﻿@model SGPI.Models.UsuarioPorDoc
 <link href="css/font-awesome/css/fontawesome.css" rel="stylesheet" />
 @{
     // EL arroba es para realizar codigo de c# en html
 
-    ViewData["Title"] = "BuscarUsuario";
+    ViewData["Title"] = "BuscarEstudiante";
     Layout = "_layout";
 
 }
 
 <header>
-    <h1>Buscar Usuario</h1>
+    <h1>Buscar Estudiante</h1>
 </header>
 
-
-<form method="post" class="container">
-    
+<form asp-action="BuscarEstudiante" asp-controller="Estudiante" method="post" class="container">
     <div class="card bg-white shadow-lg">
         <div class="row mb-4 p-3 text-center">
-            
             <div class="col-4 form-group">
-                <label class="mb-1" asp-for="NumeroDoc">Número de Documento</label>
-                <input asp-for="NumeroDoc" class="form-control" placeholder="Digite el documento a buscar">
+                <label class="mb-1">Número de Documento</label>
+                <input asp-for="Documento" class="form-control" placeholder="Digite el documento a buscar">
             </div>
             <div class="col-2 mt-4">
-                <button type="submit" style="width: 100%" class="btn btn-primary btn-sm">Consultar <i class="fa-solid fa-magnifying-glass"></i></button>
+                <button type="submit"  style="width: 100%" class="btn btn-primary btn-sm">Consultar <i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </div>
     </div>
@@ -39,8 +36,11 @@
                         <th>@Html.DisplayNameFor(model => model.PrimerApellido)</th>
                         <th>@Html.DisplayNameFor(model => model.SegundoApellido)</th>
                         <th>@Html.DisplayNameFor(model => model.Email)</th>
-                        <th>@Html.DisplayNameFor(model => model.NumeroDoc)</th>
-                        <th>@Html.DisplayNameFor(model => model.Activo)</th>
+                        <th>@Html.DisplayNameFor(model => model.Documento)</th>
+                        @* <th>@Html.DisplayNameFor(model => model.Activo)</th>  *@
+                        <th>@Html.DisplayNameFor(model => model.Genero)</th>
+                        <th>@Html.DisplayNameFor(model => model.Rol)</th>
+                        <th>@Html.DisplayNameFor(model => model.Programa)</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -51,15 +51,17 @@
                         <td>@Html.DisplayFor(modelItem => modelItem.PrimerApellido)</td>
                         <td>@Html.DisplayFor(modelItem => modelItem.SegundoApellido)</td>
                         <td>@Html.DisplayFor(modelItem => modelItem.Email)</td>
-                        <td>@Html.DisplayFor(modelItem => modelItem.NumeroDoc)</td>
-                        <td><input type="checkbox" class="form-check-input text-center" disabled asp-for="Activo" /></td>
+                        <td>@Html.DisplayFor(modelItem => modelItem.Documento)</td>
+                        @* <td><input type="checkbox" class="form-check-input text-center" disabled asp-for="Activo == true ? true : false" /></td> *@
+                        <td>@Html.DisplayFor(modelItem => modelItem.Genero)</td>
+                        <td>@Html.DisplayFor(modelItem => modelItem.Rol)</td>
+                        <td>@Html.DisplayFor(modelItem => modelItem.Programa)</td>
                         @* <td>@Html.ActionLink("Edit", "Edit", new {idUsuario = Model.IdUsuario} )</td>
                     <td>@Html.ActionLink("Delete","Delete", new{idUsuario = Model.IdUsuario}, new { onclick = "return confirm('Esta seguro de que desea eliminar este usuario')"})</td> *@
                         <td>
                             @if (Model != null)
                             {
-                                <a class="btn btn-primary btn-sm" asp-action="EditarUsuario" asp-controller="Administrador" asp-route-idUsuario="@Model.IdUsuario">Editar <i class="fa-solid fa-user-pen fa-lg"></i></a>
-                                <a class="btn btn-danger btn-sm" asp-action="Delete" asp-controller="Administrador" asp-route-idUsuario="@Model.IdUsuario">Eliminar <i class="fa-solid fa-trash-can fa-lg"></i></a>
+                                <a class="btn btn-primary btn-sm" asp-action="EditarEstudiante" asp-controller="Estudiante" asp-route-idUsuario="@Model.IdUsuario">Editar <i class="fa-solid fa-user-pen fa-lg"></i></a>
                             }
                         </td>
                     </tr>
@@ -69,4 +71,3 @@
     }
 </form>
 
-            

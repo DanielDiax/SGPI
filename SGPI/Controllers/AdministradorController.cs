@@ -60,7 +60,7 @@ namespace SGPI.Controllers
         }
 
         /// <summary>
-        /// Consulta los Drop down para la vista de creación de usuarios
+        /// Carga la vista al iniciar la página
         /// </summary>
         /// <returns></returns>
         public IActionResult BuscarUsuario()

@@ -2,11 +2,11 @@
 <link href="css/font-awesome/css/fontawesome.css" rel="stylesheet" />
 @{
 
-    ViewData["Title"] = "EditarUsuario";
+    ViewData["Title"] = "EditarEstudiante";
     Layout = "_layout";
 }
 
-<h1>EditarUsuario</h1>
+<h1>Editar Estudiante</h1>
 
 <form method="post" class="container">
     <selection>
@@ -41,21 +41,20 @@
             </div>
 
             <div class="row mt-3">
-                <div class="form-group col-6 ">
-                    <label asp-for="IdPrograma">Programa</label>
-                    @Html.DropDownList("IdPrograma", new SelectList(ViewBag.programa, "IdPrograma", "Descripcion"), new { @class = "form-control" })
-                </div>
-
                 <div class="col-6">
                     <label class="form-check-label" asp-for="Activo" for="flexCheckDefault">Activo</label>
                     <input class="form-check-input" type="checkbox" asp-for="Activo" id="Activo">
-                </div>  
+                </div>
+                <div class="form-group col-6 ">
+                    <input asp-for="Password" class="form-control" placeholder="Ejemplo: ********">
+                    <label  asp-for="Password">Contraseña</label>
+                </div> 
             </div>
 
             <br>
             <div class="row mt-3">
                 <div class="col-12 text-center">
-                    <button type="submit" class="btn btn-primary btn-sm" asp-action="Editar" asp-controller="Administrador">Guardar <i class="fa-regular fa-floppy-disk fa-lg"></i></button>
+                    <button type="submit" class="btn btn-primary btn-sm" asp-action="Editar" asp-controller="Estudiante">Guardar <i class="fa-regular fa-floppy-disk fa-lg"></i></button>
                 </div>
             </div>
         </div>

@@ -1,8 +1,41 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3">
+            <a asp-controller="Administrador" asp-action="CrearUsuario">
+                <div class="card">
+                    <p class="heading">
+                        Crear Usuario
+                    </p>
+                    <p>
+                        En esta vista creamos los nuevos usuario
+                    </p>
+                    <p>
+                        UIPB
+                    </p>
+                </div>
+            </a>
+        </div>
+        <div class="col-3" >
+            <a asp-controller="Administrador" asp-action="BuscarUsuario">
+            <div class="card">
+                <p class="heading">
+                    Buscar Usuario
+                </p>
+                <p>
+                    En esta vista consultamos los usuarios creados
+                </p>
+                <p >
+                    UIPB
+                </p>
+            </div>
+            </a>
+        </div>
+        
+    </div>
 </div>

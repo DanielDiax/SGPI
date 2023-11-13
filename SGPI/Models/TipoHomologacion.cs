@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace SGPI.Models;
+﻿namespace SGPI.Models;
 
 public partial class TipoHomologacion
 {

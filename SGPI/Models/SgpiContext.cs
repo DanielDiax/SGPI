@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
 
 namespace SGPI.Models;
 
 public partial class SgpiContext : DbContext
 {
+
     public SgpiContext()
     {
     }
@@ -35,13 +37,38 @@ public partial class SgpiContext : DbContext
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
+    public virtual DbSet<UsuarioPorDoc> UsuarioPorDoc { get; set; }
+
+
+    
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=DESKTOP-IL4AKQQ\\SQLEXPRESS;Database=SGPI;Trusted_Connection=True;TrustServerCertificate=True");
 
+    
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Asignatura>(entity =>
+        modelBuilder.Entity<UsuarioPorDoc>().ToTable("UsuarioXDoc");
+        modelBuilder.Entity<UsuarioPorDoc>().HasKey(u => u.IdUsuario);
+        modelBuilder.Entity<UsuarioPorDoc>().Property(u => u.IdUsuario).HasColumnName("IdUsuario");
+        modelBuilder.Entity<UsuarioPorDoc>().Property(u => u.Nombre).HasColumnName("Nombre");
+        modelBuilder.Entity<UsuarioPorDoc>().Property(u => u.PrimerApellido).HasColumnName("PrimerApellido");
+        modelBuilder.Entity<UsuarioPorDoc>().Property(u => u.SegundoApellido).HasColumnName("SegundoApellido");
+        modelBuilder.Entity<UsuarioPorDoc>().Property(u => u.Email).HasColumnName("Email");
+        modelBuilder.Entity<UsuarioPorDoc>().Property(u => u.TipoDocumento).HasColumnName("TipoDocumento");
+        modelBuilder.Entity<UsuarioPorDoc>().Property(u => u.Documento).HasColumnName("Documento");
+        modelBuilder.Entity<UsuarioPorDoc>().Property(u => u.Activo).HasColumnName("Activo");
+        modelBuilder.Entity<UsuarioPorDoc>().Property(u => u.Genero).HasColumnName("Genero");
+        modelBuilder.Entity<UsuarioPorDoc>().Property(u => u.Rol).HasColumnName("Rol");
+        modelBuilder.Entity<UsuarioPorDoc>().Property(u => u.Programa).HasColumnName("Programa");
+
+
+
+
+
+    modelBuilder.Entity<Asignatura>(entity =>
         {
             entity.HasKey(e => e.IdAsignatura);
 
@@ -287,6 +314,25 @@ public partial class SgpiContext : DbContext
         });
 
         OnModelCreatingPartial(modelBuilder);
+    }
+
+    // Modificado para manejar dos parámetros
+    public UsuarioPorDoc? ObtenerEstudiantePorDoc(int numDoc)
+    {
+        try
+        {
+            // var result = Set<UsuarioPorDoc>().FromSqlRaw("Sp_SGPI @Action, @numeroDoc",
+            //new SqlParameter("Action", "ConsultarUsuarioPorDoc"),
+            //new SqlParameter("numeroDoc", numDoc));
+            var resultado = UsuarioPorDoc.FromSqlInterpolated($"Sp_SGPI {"ConsultarUsuarioPorDoc"}, {numDoc}").AsEnumerable().FirstOrDefault();
+
+            return resultado;
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

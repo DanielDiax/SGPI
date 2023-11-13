@@ -16,81 +16,83 @@
 
 <form method="post" class="container">
     <selection >
-        <div class="card p-2 shadow rounded">
-            <div class="row mt-3">
-                <div class="form-group form-floating col-4">
+        <div class="card p-2 shadow rounded bg-white">
+            <div class="row mb-3">
+                <div class="form-group  col-4">
+                    <label asp-for="Nombre">Nombre</label>
                     <input asp-for="Nombre" class="form-control" placeholder="Agregue su nombre">
-                    <label for="floatingInput" asp-for="Nombre">Nombre</label>
                 </div>
 
-                <div class="form-group col-4 form-floating">
+                <div class="form-group col-4 ">
+                    <label asp-for="PrimerApellido">Primer Apellido</label>
                     <input asp-for="PrimerApellido" class="form-control" placeholder="Agregue su primer apellido">
-                    <label for="floatingInput" asp-for="PrimerApellido">Primer Apellido</label>
                 </div>
 
-                <div class="form-group form-floating col-4 ">
+                <div class="form-group  col-4 ">
+                    <label asp-for="SegundoApellido">Segundo Apellido</label>
                     <input asp-for="SegundoApellido" class="form-control" placeholder="Agregue su segundo apellido">
-                    <label for="floatingInput" asp-for="SegundoApellido">Segundo Apellido</label>
                 </div>
             </div>
 
-            <div class="row mt-3">
-                <div class="col-6 form-group form-floating">
+            <div class="row mb-3">
+                <div class="col-6 form-group ">
+                    <label  asp-for="IdDoc">Tipo de Documento</label>
                     @Html.DropDownList("IdDoc", new SelectList(ViewBag.tipoDocumento, "IdDoc", "Descripcion"), new { @class = "form-control" })
-                    <label for="floatingInput" asp-for="IdDoc">Tipo de Documento</label>
                 </div>
 
-                <div class="col-6 form-group form-floating">
+                <div class="col-6 form-group ">
+                    <label class="ms-1" asp-for="NumeroDoc">Número de Documento</label>
                     <input asp-for="NumeroDoc" class="form-control" placeholder="Ejemplo: 123456789">
-                    <label for="floatingInput" asp-for="NumeroDoc">Número de Documento</label>
                 </div>
             </div>
 
-            <div class="row mt-3">
-                <div class="form-group col-6 form-floating">
+            <div class="row mb-3">
+                <div class="form-group col-6 ">
+                    <label asp-for="IdGenero">Género</label>
                     @Html.DropDownList("IdGenero", new SelectList(ViewBag.genero, "IdGenero", "Descripcion"), new { @class = "form-control" })
-                    <label for="floatingInput" asp-for="IdGenero">Género</label>
                 </div>
 
-                <div class="form-group col-6 form-floating">
+                <div class="form-group col-6 ">
+                    <label asp-for="IdRol">Rol</label>
                     @Html.DropDownList("IdRol", new SelectList(ViewBag.rol, "IdRol", "Descripcion"), new { @class = "form-control" })
-                    <label for="floatingInput" asp-for="IdRol">Rol</label>
                 </div>
             </div>
 
-            <div class="row mt-3">
-                <div class="form-group col-6 form-floating">
+            <div class="row mb-3">
+                <div class="form-group col-6 ">
+                    <label asp-for="Email">Correo Electrónico</label>
                     <input asp-for="Email" type="email" class="form-control" placeholder="JohnDoe@example.com">
-                    <label for="floatingInput" asp-for="Email">Correo Electrónico</label>
                 </div>
 
-                <div class="form-group col-6 form-floating">
+                <div class="form-group col-6 ">
+                    <label asp-for="Password">Contraseña</label>
                     <input asp-for="Password" class="form-control" placeholder="Ejemplo: ********">
-                    <label for="floatingInput" asp-for="Password">Contraseña</label>
                 </div>
             </div>
 
-            <div class="row mt-3">
-                <div class="form-group col-6 form-floating">
+            <div class="row mb-3">
+                <div class="form-group col-6 ">
+                    <label asp-for="IdPrograma">Programa</label>
                     @Html.DropDownList("IdPrograma", new SelectList(ViewBag.programa, "IdPrograma", "Descripcion"), new { @class = "form-control" })
-                    <label for="floatingInput" asp-for="IdRol">Rol</label>
                 </div>
 
                 <div class="col-6">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <input class="form-check-input" type="checkbox" asp-for="Activo" id="flexCheckDefault">
                     <label class="form-check-label" for="flexCheckDefault">Activo</label>
                 </div>
             </div>
 
             <br>
-            <div class="row mt-3">
+            <div class="row mb-3">
                 <div class="col-12 text-center">
-                    <button type="submit" class="btn btn-primary btn-sm">Guardar</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Guardar <i class="fa-regular fa-floppy-disk fa-lg"></i></button>
                 </div>
             </div>
         </div>
        
-
+        <div class="row">
+            
+        </div>
 </form>
 
             
