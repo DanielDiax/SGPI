@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;
+using Microsoft.CodeAnalysis.RulesetToEditorconfig;
 
 namespace SGPI.Models;
 
@@ -39,8 +40,8 @@ public partial class SgpiContext : DbContext
 
     public virtual DbSet<UsuarioPorDoc> UsuarioPorDoc { get; set; }
 
+    public virtual DbSet<PagoUsuario> PagoUsuario { get; set; }
 
-    
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -65,10 +66,19 @@ public partial class SgpiContext : DbContext
         modelBuilder.Entity<UsuarioPorDoc>().Property(u => u.Programa).HasColumnName("Programa");
 
 
+        modelBuilder.Entity<PagoUsuario>().ToTable("PagoUsuario");
+        modelBuilder.Entity<PagoUsuario>().HasKey(u => u.IdPago);
+        modelBuilder.Entity<PagoUsuario>().Property(u => u.IdPago).HasColumnName("IdPago");
+        modelBuilder.Entity<PagoUsuario>().Property(u => u.Nombre).HasColumnName("Nombre");
+        modelBuilder.Entity<PagoUsuario>().Property(u => u.PrimerApellido).HasColumnName("PrimerApellido");
+        modelBuilder.Entity<PagoUsuario>().Property(u => u.SegundoApellido).HasColumnName("SegundoApellido");
+        modelBuilder.Entity<PagoUsuario>().Property(u => u.NumDoc).HasColumnName("NumDoc");
+        modelBuilder.Entity<PagoUsuario>().Property(u => u.Programa).HasColumnName("Programa");
+        modelBuilder.Entity<PagoUsuario>().Property(u => u.ValorPago).HasColumnName("ValorPago");
+        modelBuilder.Entity<PagoUsuario>().Property(u => u.Fecha).HasColumnName("Fecha");
 
 
-
-    modelBuilder.Entity<Asignatura>(entity =>
+        modelBuilder.Entity<Asignatura>(entity =>
         {
             entity.HasKey(e => e.IdAsignatura);
 
@@ -157,21 +167,12 @@ public partial class SgpiContext : DbContext
 
         modelBuilder.Entity<Pago>(entity =>
         {
-            entity.HasKey(e => e.IdPago);
-
-            entity.ToTable("Pago");
-
-            entity.Property(e => e.IdPago).HasColumnName("id_pago");
-            entity.Property(e => e.Fecha)
-                .HasColumnType("date")
-                .HasColumnName("fecha");
-            entity.Property(e => e.IdUsuario).HasColumnName("id_usuario");
-            entity.Property(e => e.ValorPago).HasColumnName("valor_pago");
-
-            entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Pagos)
-                .HasForeignKey(d => d.IdUsuario)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Pago_Usuarios");
+            modelBuilder.Entity<Pago>().ToTable("Pago");
+            modelBuilder.Entity<Pago>().HasKey(u => u.IdPago);
+            modelBuilder.Entity<Pago>().Property(u => u.IdPago).HasColumnName("id_pago");
+            modelBuilder.Entity<Pago>().Property(u => u.IdUsuario).HasColumnName("id_usuario");
+            modelBuilder.Entity<Pago>().Property(u => u.ValorPago).HasColumnName("valor_pago");
+            modelBuilder.Entity<Pago>().Property(u => u.Fecha).HasColumnName("fecha");
         });
 
         modelBuilder.Entity<Programa>(entity =>
@@ -316,7 +317,6 @@ public partial class SgpiContext : DbContext
         OnModelCreatingPartial(modelBuilder);
     }
 
-    // Modificado para manejar dos parámetros
     public UsuarioPorDoc? ObtenerEstudiantePorDoc(int numDoc)
     {
         try
@@ -334,6 +334,52 @@ public partial class SgpiContext : DbContext
         }
 
     }
+
+    public int GuardarPago(Pago pago)
+    {
+       var result = Database.ExecuteSqlRaw("exec InsertarPagoSP @IdUsuario, @ValorPago, @FechaPago",
+        new SqlParameter("@IdUsuario", pago.IdUsuario),
+        new SqlParameter("@ValorPago", pago.ValorPago),
+        new SqlParameter("@FechaPago", pago.Fecha));
+        return result;
+    }
+
+
+    public List<PagoUsuario>? ObtenerPagos(int IdUsuario)
+    {
+        try
+        {
+            List<PagoUsuario> resultado = new List<PagoUsuario>();
+            resultado = PagoUsuario.FromSqlInterpolated($"ObtenerPagos {IdUsuario}").ToList();
+
+            if (resultado != null && resultado.Count > 0)
+            {
+                return resultado;
+            }
+            else
+            {
+                return new List<PagoUsuario>();
+            }
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+    }
+
+    //public PagoUsuario? ObtenerPagos(int IdUsuario)
+    //{
+    //    try
+    //    {
+    //        var respuesta = PagoUsuario.FromSqlInterpolated($"ObtenerPagos {IdUsuario}").AsEnumerable().FirstOrDefault();
+
+    //        return respuesta;
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        return null;
+    //    }
+    //}
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }

@@ -6,7 +6,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-3">
+        <div class="col-3 mb-3">
             <a asp-controller="Administrador" asp-action="CrearUsuario">
                 <div class="card">
                     <p class="heading">
@@ -37,5 +37,54 @@
             </a>
         </div>
         
+        <div class="col-3">
+            <a asp-controller="Estudiante" asp-action="BuscarEstudiante">
+                <div class="card">
+                    <p class="heading">
+                        Buscar Estudiante
+                    </p>
+                    <p>
+                        En esta vista consultamos a los estudiantes creados
+                    </p>
+                    <p>
+                        UIPB
+                    </p>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-3">
+            <a asp-controller="Estudiante" asp-action="Pagos">
+                <div class="card">
+                    <p class="heading">
+                        Pagos Estudiante
+                    </p>
+                    <p>
+                        En esta vista se crean y se consultan los pagos
+                    </p>
+                    <p>
+                        UIPB
+                    </p>
+                </div>
+            </a>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-3 mt-4">
+            <a asp-controller="Estudiante" asp-action="ObtenerPagos">
+                <div class="card">
+                    <p class="heading">
+                        Mis Pagos
+                    </p>
+                    <p>
+                        Consulta los pagos hechos por el estudiante logueado
+                    </p>
+                    <p>
+                        UIPB
+                    </p>
+                </div>
+            </a>
+        </div>
     </div>
 </div>

@@ -116,7 +116,7 @@ namespace SGPI.Controllers
                 if (Documento == 0)
                 {
                     // El número de documento es nulo, puedes manejarlo como desees (por ejemplo, mostrar un mensaje de error).
-                    //return View("Error");
+                    return View("Error");
                 }
 
                 var usuarios = context.ObtenerEstudiantePorDoc(Documento);
@@ -131,6 +131,49 @@ namespace SGPI.Controllers
                 Console.WriteLine($"Error: {ex.Message}");
                 return View("Error");
             }
+        }
+
+        public IActionResult Pagos()
+        {
+            
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Pagos(Pago pago)
+        {
+            int result = 0;
+            pago.IdUsuario = 12;
+            DateTime ahora = DateTime.Now;
+
+            result = context.GuardarPago(pago);
+
+            if(result == 1)
+            {
+                TempData["MensajeSuccess"] = "Pago exitoso.";
+                return View();
+            }
+            else
+            {
+                TempData["MensajeWarn"] = "Pago realizado anteriormente.";
+                return View();
+            }
+        }
+
+        public IActionResult ObtenerPagos()
+        {
+            ObtenerPagos(12);
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ObtenerPagos(int idUsuario)
+        {
+            idUsuario = 12;
+
+            var respuesta = context.ObtenerPagos(idUsuario);
+
+            return View(respuesta);
         }
     }
 }

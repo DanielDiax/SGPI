@@ -11,7 +11,7 @@ public partial class Pago
 
     public double ValorPago { get; set; }
 
-    public DateTime Fecha { get; set; }
+    public DateTime? Fecha { get; set; }
 
     public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
 }

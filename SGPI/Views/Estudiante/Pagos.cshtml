@@ -1,0 +1,57 @@
+﻿@model SGPI.Models.Pago
+@{
+    ViewData["Title"] = "Pagos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/css/datePicker" asp-append-version="true" />
+<h1>Pagos</h1>
+
+
+<form method="post" class="container mt-4 card shadow-lg bg-white mb-2 p-1">
+    <div class="row">
+        <div class="form-group col-3">
+            <label asp-for="ValorPago">Valor Pago</label>
+            <input asp-for="ValorPago" class="form-control" placeholder="Agregue el valor del pago">
+        </div>
+        <div class="form-group col-3">
+            <div>
+                <label asp-for="Fecha"></label>
+                <input asp-for="Fecha" id="fecha" class="datepicker" />
+            </div>
+        </div>
+        <div class="col-2 mt-4">
+            <button type="submit" class="btn btn-primary btn-sm" style="width: 100%" asp-action="Pagos" asp-controller="Estudiante">Guardar <i class="fa-regular fa-floppy-disk fa-lg"></i></button>
+        </div>
+        @if (TempData["MensajeSuccess"] != null)
+        {
+            <div class="alert alert-success col-4">@TempData["MensajeSuccess"]</div>
+        }
+        @if (TempData["MensajeWarn"] != null)
+        {
+            <div class="alert alert-warning col-4">@TempData["MensajeWarn"]</div>
+        }
+    </div>
+    </form>
+
+
+
+<!-- Agrega esto a tu formulario -->
+
+
+@section scripts {
+    <!-- Agrega este script en la sección scripts al final de tu página -->
+    <script>
+        $(document).ready(function () {
+            $('.datepicker').datepicker({
+                dateFormat: 'yy-mm-dd', // Formato de fecha
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                autoclose: true, // Cierra automáticamente el calendario al seleccionar una fecha
+                todayHighlight: true
+            });
+
+            // Agrega la clase 'form-control' para que el input se vea como un input de Bootstrap
+            $('.datepicker').addClass('form-control datepicker');
+        });
+    </script>
+}

@@ -1,0 +1,23 @@
+/* Estilos adicionales para mejorar la apariencia */
+.ui-datepicker {
+    font-size: 14px; /* Ajusta el tamaño de la fuente */
+}
+
+.ui-datepicker-header {
+    background-color: #007bff; /* Color de fondo del encabezado */
+    color: white; /* Color del texto del encabezado */
+}
+
+.ui-datepicker-calendar th, .ui-datepicker-calendar td {
+    border: 1px solid #dee2e6; /* Color del borde de las celdas */
+    text-align: center; /* Alineación del texto en el centro */
+}
+
+.ui-datepicker-calendar a {
+    color: #495057; /* Color del texto de las fechas */
+}
+
+    .ui-datepicker-calendar a:hover {
+        background-color: #007bff; /* Color de fondo al pasar el ratón sobre una fecha */
+        color: white; /* Color del texto al pasar el ratón sobre una fecha */
+    }
